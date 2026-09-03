@@ -1,3 +1,21 @@
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+$full_name = trim($_POST['full_name']);
+$email = trim($_POST['email']);
+$password = $_POST['password'];
+$confirm = $_POST['confirm_password'];
+$roll_number = trim($_POST['roll_number']);
+$class = trim($_POST['class']);
+if (empty($full_name) || empty($email) || empty($password)
+|| empty($roll_number) || empty($class)) {
+$error = 'All fields are required.';
+} elseif ($password !== $confirm) {
+$error = 'Passwords do not match.';
+} else {
+$success = 'Looks good! (Not saved yet — database class is next.)';
+}
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,7 +63,8 @@
             </div>
 
             <button type="submit" class="btn btn-primary mt-2">Register</button>
-
+    <?php if (isset($error)) { echo "<p style='color:red;'>$error</p>"; } ?>
+    <?php if (isset($success)) { echo "<p style='color:green;'>$success</p>"; } ?>
         </form>
     </div>
 
