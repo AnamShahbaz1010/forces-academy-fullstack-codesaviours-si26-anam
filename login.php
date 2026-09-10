@@ -1,3 +1,30 @@
+<?php
+session_start();
+require_once 'config/db.php';
+
+$error = "";
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $password = $_POST['password'];
+
+    $result = mysqli_query($conn, "SELECT * FROM students WHERE email = '$email'");
+
+    if (mysqli_num_rows($result) === 0) {
+        $error = "No account with that email.";
+    } else {
+        $student = mysqli_fetch_assoc($result);
+        if (password_verify($password, $student['password'])) {
+            $_SESSION['student_id'] = $student['id'];
+            $_SESSION['student_name'] = $student['full_name'];
+            header('Location: dashboard.php');
+            exit;
+        } else {
+            $error = "Incorrect password.";
+        }
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +38,9 @@
 
     <div class="container">
         <h2>Login</h2>
-
+        <?php if ($error) { ?>
+    <div class="alert alert-danger"><?php echo $error; ?></div>
+<?php } ?>
         <form action="login.php" method="POST">
 
             <div class="mb-3">

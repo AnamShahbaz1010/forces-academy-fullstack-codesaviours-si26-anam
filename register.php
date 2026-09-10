@@ -1,19 +1,36 @@
 <?php
+require_once 'config/db.php';
+
+$error = "";
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-$full_name = trim($_POST['full_name']);
-$email = trim($_POST['email']);
-$password = $_POST['password'];
-$confirm = $_POST['confirm_password'];
-$roll_number = trim($_POST['roll_number']);
-$class = trim($_POST['class']);
-if (empty($full_name) || empty($email) || empty($password)
-|| empty($roll_number) || empty($class)) {
-$error = 'All fields are required.';
-} elseif ($password !== $confirm) {
-$error = 'Passwords do not match.';
-} else {
-$success = 'Looks good! (Not saved yet — database class is next.)';
-}
+    $full_name = mysqli_real_escape_string($conn, $_POST['full_name']);
+    $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $password = $_POST['password'];
+    $confirm_password = $_POST['confirm_password'];
+    $roll_number = mysqli_real_escape_string($conn, $_POST['roll_number']);
+    $class = mysqli_real_escape_string($conn, $_POST['class']);
+
+    if ($password !== $confirm_password) {
+        $error = "Passwords do not match.";
+    } else {
+        $check = mysqli_query($conn, "SELECT id FROM students WHERE email = '$email'");
+        if (mysqli_num_rows($check) > 0) {
+            $error = "An account with this email already exists.";
+        } else {
+            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+            $sql = "INSERT INTO students (full_name, email, password, roll_number, class)
+                    VALUES ('$full_name', '$email', '$hashed_password', '$roll_number', '$class')";
+
+            if (mysqli_query($conn, $sql)) {
+                header('Location: login.php');
+                exit;
+            } else {
+                $error = "Something went wrong. Please try again.";
+            }
+        }
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -29,6 +46,10 @@ $success = 'Looks good! (Not saved yet — database class is next.)';
 
     <div class="container">
         <h2>Register</h2>
+
+        <?php if ($error) { ?>
+            <div class="alert alert-danger"><?php echo $error; ?></div>
+        <?php } ?>
 
         <form action="register.php" method="POST">
 
@@ -63,8 +84,7 @@ $success = 'Looks good! (Not saved yet — database class is next.)';
             </div>
 
             <button type="submit" class="btn btn-primary mt-2">Register</button>
-    <?php if (isset($error)) { echo "<p style='color:red;'>$error</p>"; } ?>
-    <?php if (isset($success)) { echo "<p style='color:green;'>$success</p>"; } ?>
+
         </form>
     </div>
 
