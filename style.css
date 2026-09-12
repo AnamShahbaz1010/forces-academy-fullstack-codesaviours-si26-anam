@@ -404,3 +404,16 @@ h3 {
     text-shadow: 0 0 8px var(--neon-cyan);
     margin: 0;
 }
+.card {
+    background: rgba(15, 15, 25, 0.85);
+    border: 1px solid var(--neon-cyan);
+    color: #e0e0e0;
+}
+
+.card h5, .card p {
+    color: #e0e0e0;
+}
+
+.card .badge.bg-success {
+    box-shadow: 0 0 8px #00ff99;
+}
