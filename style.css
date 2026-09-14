@@ -417,3 +417,8 @@ h3 {
 .card .badge.bg-success {
     box-shadow: 0 0 8px #00ff99;
 }
+.table .btn {
+    display: block;
+    margin-bottom: 6px;
+    width: 70px;
+}
