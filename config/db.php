@@ -1,12 +1,13 @@
 <?php
-$host = "localhost";
-$username = "root";
-$password = "";
-$database = "forces_academy_lms";
+$is_local = ($_SERVER['SERVER_NAME'] === 'localhost');
 
-$conn = mysqli_connect($host, $username, $password, $database);
+if ($is_local) {
+    $conn = mysqli_connect("localhost", "root", "", "forces_academy_lms");
+} else {
+    $conn = mysqli_connect("sql103.infinityfree.com", "if0_42959759", "pI2jGdNKCmI5", "if0_42959759_XXX");
+}
 
 if (!$conn) {
-    die("Database connection failed: " . mysqli_connect_error());
+    die("Connection failed: " . mysqli_connect_error());
 }
 ?>

@@ -1,6 +1,9 @@
 <?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 session_start();
 require_once 'config/db.php';
+var_dump($_POST);
 
 $error = "";
 
@@ -9,7 +12,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'];
 
     $result = mysqli_query($conn, "SELECT * FROM students WHERE email = '$email'");
-
+    var_dump(mysqli_error($conn)); // ADD THIS
+    var_dump(mysqli_num_rows($result)); // ADD THIS
     if (mysqli_num_rows($result) === 0) {
         $error = "No account with that email.";
     } else {
