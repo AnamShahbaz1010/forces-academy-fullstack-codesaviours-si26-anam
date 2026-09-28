@@ -32,19 +32,7 @@ $timetableResult = mysqli_query($conn, "SELECT * FROM timetable ORDER BY class, 
 
     <div class="d-flex">
 
-        <div class="bg-dark text-white p-3" style="width: 220px; min-height: 100vh;">
-            <h5>Admin Panel</h5>
-            <ul class="nav flex-column">
-                <li class="nav-item"><a class="nav-link text-white" href="dashboard.php">Dashboard</a></li>
-                <li class="nav-item"><a class="nav-link text-white" href="students.php">Manage Students</a></li>
-                <li class="nav-item"><a class="nav-link text-white" href="courses.php">Manage Courses</a></li>
-                <li class="nav-item"><a class="nav-link text-white" href="assignments.php">Manage Assignments</a></li>
-                <li class="nav-item"><a class="nav-link text-white" href="timetable.php">Timetable</a></li>
-                <li class="nav-item"><a class="nav-link text-white" href="results.php">Upload Results</a></li>
-                <li class="nav-item"><a class="nav-link text-white" href="notices.php">Post Notice</a></li>
-                <li class="nav-item"><a class="nav-link text-white" href="logout.php">Logout</a></li>
-            </ul>
-        </div>
+        <?php include 'sidebar.php'; ?>
 
         <div class="p-4" style="flex: 1;">
 
@@ -64,9 +52,15 @@ $timetableResult = mysqli_query($conn, "SELECT * FROM timetable ORDER BY class, 
                         <option>Friday</option>
                     </select>
                 </div>
-                <div class="mb-2">
-                    <input type="text" name="time_slot" placeholder="Time Slot (e.g. 9:00 - 10:00 AM)" class="form-control" required>
-                </div>
+            <div class="mb-2">
+                <select name="time_slot" class="form-control" required>
+                    <option value="">Select Time Slot</option>
+                    <option>9:00 - 10:00</option>
+                    <option>10:00 - 11:00</option>
+                    <option>11:00 - 12:00</option>
+                    <option>12:00 - 1:00</option>
+                </select>
+            </div>
                 <div class="mb-2">
                     <input type="text" name="subject" placeholder="Subject" class="form-control" required>
                 </div>

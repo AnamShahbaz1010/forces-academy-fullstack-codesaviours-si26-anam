@@ -21,6 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (password_verify($password, $student['password'])) {
             $_SESSION['student_id'] = $student['id'];
             $_SESSION['student_name'] = $student['full_name'];
+            $_SESSION['student_class'] = $student['class'];
             header('Location: dashboard.php');
             exit;
         } else {
