@@ -9,11 +9,12 @@ require_once '../config/db.php';
 $search = isset($_GET['search']) ? $_GET['search'] : '';
 $searchTerm = '%' . $search . '%';
 
-$sql = "SELECT * FROM students WHERE full_name LIKE ? OR roll_number LIKE ?";
+$sql = "SELECT * FROM students WHERE full_name LIKE ? OR roll_number LIKE ? OR email LIKE ?";
 $stmt = mysqli_prepare($conn, $sql);
-mysqli_stmt_bind_param($stmt, "ss", $searchTerm, $searchTerm);
+mysqli_stmt_bind_param($stmt, "sss", $searchTerm, $searchTerm, $searchTerm);
 mysqli_stmt_execute($stmt);
 $studentsResult = mysqli_stmt_get_result($stmt);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

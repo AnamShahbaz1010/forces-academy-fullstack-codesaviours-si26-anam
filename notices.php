@@ -5,7 +5,14 @@ if (!isset($_SESSION['student_id'])) {
     exit;
 }
 require_once 'config/db.php';
-$result = mysqli_query($conn, "SELECT * FROM notices ORDER BY created_at DESC");
+$search = isset($_GET['search']) ? $_GET['search'] : '';
+$searchTerm = '%' . $search . '%';
+
+$sql = "SELECT * FROM notices WHERE title LIKE ? ORDER BY created_at DESC";
+$stmt = mysqli_prepare($conn, $sql);
+mysqli_stmt_bind_param($stmt, "s", $searchTerm);
+mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,6 +31,23 @@ $result = mysqli_query($conn, "SELECT * FROM notices ORDER BY created_at DESC");
 
         <div class="p-4" style="flex: 1;">
             <h2>Notices</h2>
+
+            <div class="p-4" style="flex: 1;">
+    <h2>Notices</h2>
+
+    <form method="GET" class="mb-3">
+        <input type="text" name="search" value="<?php echo htmlspecialchars($search); ?>" placeholder="Search by title" class="form-control" style="width: 300px;">
+        <button type="submit" class="btn btn-primary mt-2">Search</button>
+    </form>
+
+<?php while ($notice = mysqli_fetch_assoc($result)) { ?>
+    <div class="alert alert-info">
+        <strong><?php echo htmlspecialchars($notice['title']); ?></strong><br>
+        <?php echo htmlspecialchars($notice['content']); ?><br>
+        <small><?php echo date('F j, Y', strtotime($notice['created_at'])); ?></small>
+    </div>
+<?php } ?>
+        </div>
 
 <?php while ($notice = mysqli_fetch_assoc($result)) { ?>
     <div class="alert alert-info">

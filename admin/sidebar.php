@@ -7,6 +7,7 @@
         <li class="nav-item"><a class="nav-link text-white" href="assignments.php">Manage Assignments</a></li>
         <li class="nav-item"><a class="nav-link text-white" href="timetable.php">Timetable</a></li>
         <li class="nav-item"><a class="nav-link text-white" href="results.php">Upload Results</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="fees.php">Fees</a></li>
         <li class="nav-item"><a class="nav-link text-white" href="notices.php">Post Notice</a></li>
         <li class="nav-item"><a class="nav-link text-white" href="logout.php">Logout</a></li>
     </ul>

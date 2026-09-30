@@ -19,6 +19,13 @@ $resultsData = mysqli_stmt_get_result($stmt);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Results</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+    @media print {
+        .sidebar, .btn {
+            display: none;
+        }
+    }
+</style>
     <link href="style.css" rel="stylesheet">
 </head>
 <body>
@@ -29,6 +36,7 @@ $resultsData = mysqli_stmt_get_result($stmt);
 
         <div class="p-4" style="flex: 1;">
             <h2>My Results</h2>
+<button onclick="window.print()" class="btn btn-secondary mb-3">Print Results</button>
 
 <table class="table table-dark table-bordered">
     <thead>
