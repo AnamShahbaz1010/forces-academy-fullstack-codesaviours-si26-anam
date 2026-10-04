@@ -8,11 +8,11 @@ A full-stack Learning Management System for Forces Academy, with separate studen
 
 | Student Dashboard | Course Listing |
 |---|---|
-| ![Student Dashboard](screenshots/dashboard.png) | ![Courses](screenshots/courses.png) |
+| ![Student Dashboard](Screenshots/dashboard.png) | ![Courses](Screenshots/courses.png) |
 
 | Admin Panel | Manage Assignments |
 |---|---|
-| ![Admin Dashboard](screenshots/admin%20dashboard.png) | ![Manage Assignments](screenshots/manage%20assignment.png) |
+| ![Admin Dashboard](Screenshots/admin%20dashboard.png) | ![Manage Assignments](Screenshots/manage%20assignment.png) |
 
 ---
 
