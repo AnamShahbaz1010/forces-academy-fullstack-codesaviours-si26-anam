@@ -12,16 +12,14 @@ session_start();
 </head>
 <body>
 
-    <div class="d-flex flex-column justify-content-center align-items-center" style="min-height: 100vh;">
-
-        <h1 style="color: var(--neon-cyan);">Forces Academy</h1>
-        <p class="text-white mb-4">Your student portal for courses, assignments, and results.</p>
+    <div class="landing">
+        <h1>Forces Academy</h1>
+        <p>Your student portal for courses, assignments, and results.</p>
 
         <div>
             <a href="login.php" class="btn btn-primary me-2">Login</a>
             <a href="register.php" class="btn btn-outline-info">Register</a>
         </div>
-
     </div>
 
 </body>
